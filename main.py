@@ -47,10 +47,12 @@ model.add(Dense(total_words, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 print(model.summary())
 
-# Обучение и сохранение
-model.fit(X, y, epochs=100, verbose=1)
+#===============Обучение и сохранение
+# epochs - это число эпох, на которое будет обучаться нейронная сеть.
+# verbose=1 вывод информации после каждой epochs. verbose=0 - отключить вывод информации.
+model.fit(X, y, epochs=100, verbose=1) 
 model.save('chatbot_model.h5')
-
+#====================================
 # Функция для генерации вопроса
 def generate_answer(seed_text):
     next_words = max_sequence_len - 1
@@ -66,7 +68,7 @@ def generate_answer(seed_text):
         seed_text += " " + output_word
     return seed_text
 
-# Функция для генерации ответа, включающего текущую дату |beta 
+# Функция для генерации ответа, включающая текущую дату |beta 
 def generate_response(seed_text):
     generated_answer = generate_answer(seed_text)
     if "сегодня" in seed_text.lower():
